@@ -10,6 +10,9 @@ import bluetooth
 #from boomThread import boomThread
 import tty, sys, termios
 
+cmd = 'sudo hciconfig hci0 piscan'
+os.system(cmd)
+
 wait = 0.001
 #F4:42:8F:10:5F:5F
 connection = False
@@ -42,9 +45,11 @@ while 1:
         connection = True
         print("Accepted connection from ", client_info)
     try:  
-        data = client_sock.recv(1024)
-    #    print(data)
+        data = client_sock.recv(5)
         device.write(data)
+    #    print(data)
+      #  for i in range(49):
+       #     device.write(data[i])
      #   if data == "disconnect":
       #      print("Client wanted to disconnect")
        #     client_sock.close()
