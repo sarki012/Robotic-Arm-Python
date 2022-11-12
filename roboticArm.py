@@ -31,12 +31,18 @@ advertise_service( server_sock, "raspberrypi",
 
 filedescriptors = termios.tcgetattr(sys.stdin)
 tty.setcbreak(sys.stdin)
-#device = Device('FT71VG2G')     #Top USB
-device = Device('FT7210GA')     #Bottom USB
-device.baudrate = 115200
-device.open()
+deviceUC1 = Device('FT7210GA')     #Bottom USB
+deviceUC1.baudrate = 115200
+deviceUC1.open()
+deviceUC2 = Device('FT71VG2G')     #Top USB
+deviceUC2.baudrate = 115200
+deviceUC2.open()
+
+#data = []
+
 #device.write('?\r')             #send an identity query command.
                             #This device needs \r to end command.
+#data_char = []
 x = 0
 while 1:
     if(connection == False):
@@ -45,11 +51,30 @@ while 1:
         connection = True
         print("Accepted connection from ", client_info)
     try:  
-        data = client_sock.recv(5)
-        device.write(data)
-    #    print(data)
-      #  for i in range(49):
-       #     device.write(data[i])
+        data = client_sock.recv(50)
+        if len(data) == 0:
+            break
+        data_char = chr(data[0])
+        if data_char == 'u':
+            print(data_char)
+            deviceUC1.write('u')
+        elif data_char == 'd':
+            print(data_char)
+            deviceUC1.write('d')
+        elif data_char == 'l':
+            print(data_char)
+            deviceUC1.write('l')
+        elif data_char == 'r':
+            print(data_char)
+            deviceUC1.write('r')
+        elif data_char == 'o':
+            print(data_char)
+            deviceUC2.write('o')
+        elif data_char == 'i':
+            print(data_char)
+            deviceUC2.write('i')
+        #deviceUC1.write(data)
+        #deviceUC2.write(data)
      #   if data == "disconnect":
       #      print("Client wanted to disconnect")
        #     client_sock.close()
