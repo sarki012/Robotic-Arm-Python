@@ -56,23 +56,23 @@ while 1:
             break
         data_char = chr(data[0])
         if data_char == 'u':
-            print(data_char)
             deviceUC1.write('u')
         elif data_char == 'd':
-            print(data_char)
             deviceUC1.write('d')
+        elif data_char == '@':
+            deviceUC1.write('@')
         elif data_char == 'l':
-            print(data_char)
             deviceUC1.write('l')
         elif data_char == 'r':
-            print(data_char)
             deviceUC1.write('r')
+        elif data_char == '$':
+            deviceUC1.write('$')
         elif data_char == 'o':
-            print(data_char)
             deviceUC2.write('o')
         elif data_char == 'i':
-            print(data_char)
             deviceUC2.write('i')
+        elif data_char == '*':
+            deviceUC2.write('*')
         #deviceUC1.write(data)
         #deviceUC2.write(data)
      #   if data == "disconnect":
